@@ -77,10 +77,10 @@ function Game(){
 				var target = convert_field_id(the_player,result);
 				var the_field = field_list.find(function(f){return f.get_id()==target;});
 				console.log("check get filed "+the_field.get_name());
-				movement(the_player,the_field,myevent);
-				this.removeEventListener('click',a,false);
+				movement(the_player,the_field,myevent);	
 				this.removeEventListener("dieRun",h,false);
 			});
+			this.removeEventListener('click',a,false);
 		},false);
   		// button.addEventListener( "click", );//https://msdn.microsoft.com/zh-tw/library/ff841995(v=vs.94).aspx
 		
@@ -98,9 +98,8 @@ function roll_die(){
 	  return;
    	interval = window.setInterval(run, 100 );
 
-   	
-   		alert("return 囉");
-		return result;
+
+	return result;
 		
 }
    	
@@ -132,38 +131,60 @@ function movement(the_player,the_field,myevent){
 		if(the_field.get_id()!="100"){
 		// the country has no owner
 			if(the_field.state==null){
-				if(confirm("你要購買土地嗎？要花你1000元歐")){
-					the_field.transaction(the_player,0);
+				if(the_player.get_cash()<1000){
+					alert("你錢不夠歐");
+				}
+				else{
+					if(confirm("你要購買土地嗎？要花你1000元歐")){
+						the_field.transaction(the_player,0);
+					}
 				}
 			}//the country has owner
 			else{
 				//build up if your the owner
 				if(the_field.get_owner().get_name()==the_player.get_name()){
-					if(confirm("你要蓋房子嗎？要花你500元歐")){
-						the_field.transaction(the_player,2);
+					if(thd_player.get_cash()<500){
+						alert("你錢不夠歐");
+					}
+					else{
+						if(confirm("你要蓋房子嗎？要花你500元歐")){
+							the_field.transaction(the_player,2);
+						}
 					}
 				}
 				else{
-					if(the_player.get_cash()>the_field.get_price()){
-						//buy it
-						if(confirm("你要買下來嗎？要花你"+the_field.get_price()+"元歐")){
-							the_field.transaction(the_player,1);
-						}
-						//pay rent
-						else{
-							alert("你要給"+the_field.get_owner().get_name()+the_field.get_rent()+"元ＱＱ");
-							the_field.get_owner().add_cash(the_field.get_rent());
-							the_player.add_cash(-the_field.get_rent());
-							console.log("------pay rent------");
-							the_field.get_owner().print();
-							the_player.print();
-							if(the_player.check_bankruptcy()){
-								alert("Game Over!");
+					if(the_player.get_cash()>=the_field.get_rent()){
+						if(the_player.get_cash()>the_field.get_price())
+						{
+							//buy it
+							if(confirm("你要買下來嗎？要花你"+the_field.get_price()+"元歐")){
+								the_field.transaction(the_player,1);
 							}
+							//pay rent
+							else{
+								alert("你要給"+the_field.get_owner().get_name()+the_field.get_rent()+"元ＱＱ");
+								the_field.get_owner().add_cash(the_field.get_rent());
+								the_player.add_cash(-the_field.get_rent());
+								console.log("------pay rent------");
+								the_field.get_owner().print();
+								the_player.print();
+								if(the_player.check_bankruptcy()){
+									alert("Game Over!");
+								}
+							}
+						}
+						else{
+								alert("你要給"+the_field.get_owner().get_name()+the_field.get_rent()+"元ＱＱ");
+								the_field.get_owner().add_cash(the_field.get_rent());
+								the_player.add_cash(-the_field.get_rent());
+								console.log("------pay rent------");
+								the_field.get_owner().print();
+								the_player.print();
 						}
 					}
 					else{
-						alert("Game Over!");
+						alert(the_player.get_name()+"你破產了");
+						window.dispatchEvent(gameover);
 					}
 				}
 			}
@@ -172,8 +193,9 @@ function movement(the_player,the_field,myevent){
 		// console.log("#player"+the_player.get_id()+" "+".money: "+money);
 		// $("#player"+the_player.get_id()+" "+".money").html(money);
 		
-		the_player.my_round_end(myevent);
+		
 		}
+		the_player.my_round_end(myevent);
 		// alert(the_player.get_id()+" 觸發");
 		this.removeEventListener('moveMark',t,false);
 		window.dispatchEvent(myevent);

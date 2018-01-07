@@ -32,7 +32,7 @@ $(document).ready(function(){
 			location.reload();
 		}	
 		else{
-			window.close();
+			window.location = 'http://google.com.tw';
 		}
 	});
 
