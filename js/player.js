@@ -2,7 +2,7 @@
 function Player (id,name){
 	this.id=id;
 	this.name=name;
-	this.cash=2000;
+	this.cash=10000;
 	this.position=100;
 
 
@@ -95,25 +95,47 @@ function move (tt,tl,id,moveMark) {
    // document.getElementById(id).innerHTML = num;
 
    var success=0;
+
    if(ot!=tt){
-   		if(tt-ot<2){
-			$('#'+id).css("top",tt);
+   		if(ot>tt){
+			if(ot-tt<2){
+				$('#'+id).css("top",tt);
+   			}
+   			else{
+   				$('#'+id).css("top",ot-3);
+   			}
    		}
    		else{
-   			$('#'+id).css("top",ot+1);
+   			if(tt-ot<2){
+				$('#'+id).css("top",tt);
+   			}
+   			else{
+   				$('#'+id).css("top",ot+3);
+   			}
    		}
+
    }
    else{
    		success+=50;
    }
 
    if(ol!=tl){
-   		if(tl-ol<2){
-   			$('#'+id).css("left",tl);
+   		if(ol>tl){
+   			if(ol-tl<2){
+	   			$('#'+id).css("left",tl);
+	   		}
+	   		else{
+	   			$('#'+id).css("left",ol-3);
+	   		}
    		}
    		else{
-   			$('#'+id).css("left",ol+3);
-   		}
+	   		if(tl-ol<2){
+	   			$('#'+id).css("left",tl);
+	   		}
+	   		else{
+	   			$('#'+id).css("left",ol+3);
+	   		}
+	   	}
    }
    else{
    	success+=50;

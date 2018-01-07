@@ -121,9 +121,9 @@ function run(){
 }
 
 function movement(the_player,the_field,myevent){
-	alert(the_player.get_name()+" arrive at "+the_field.get_name()+"\n");
 	// move mark
 	the_player.set_position(the_field,moveMark);
+	alert(the_player.get_name()+" arrive at "+the_field.get_name()+"\n");
 	window.addEventListener("moveMark",function t(){
 
 		the_player.print();
@@ -143,7 +143,7 @@ function movement(the_player,the_field,myevent){
 			else{
 				//build up if your the owner
 				if(the_field.get_owner().get_name()==the_player.get_name()){
-					if(thd_player.get_cash()<500){
+					if(the_player.get_cash()<500){
 						alert("你錢不夠歐");
 					}
 					else{
@@ -209,8 +209,9 @@ function convert_field_id(the_player,number){
 		var now = the_player.get_position().get_id()%100;
 		var temp = now+number;
 		if(temp>19){
-			// number = temp-19;
-			number=0;
+			number = temp-19;
+			// number=0;
+			alert("經過起點");
 		}
 		else{
 			number = temp;
