@@ -12,7 +12,7 @@ $(document).ready(function(){
 	game.establish(players, country_name);
 	game.print(2,2);
 	var s = 0;
-	game.updata_cash();
+	// game.updata_cash();
 	game.round(myevent,s);
 	
 	window.addEventListener("roundOver",function(){
@@ -21,7 +21,7 @@ $(document).ready(function(){
 			s=0;
 		else
 			s++;
-		game.updata_cash();
+		// game.updata_cash();
 		// var n = game.next_one();
 		console.log(s+" is my turn");
 		game.round(myevent,s);

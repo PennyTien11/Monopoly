@@ -49,13 +49,13 @@ function Game(){
 		// console.log("position: "+this.position);
 	};
 
-	this.updata_cash= function(){
-		for(var i=0; i<4; i++){
-			var money = this.players[i].get_cash();
-			// console.log(this.players[i].get_id());
-			$("#player"+(i).toString()+" "+".money").html(money);
-		}
-	}
+	// this.updata_cash= function(){
+	// 	for(var i=0; i<4; i++){
+	// 		var money = this.players[i].get_cash();
+	// 		// console.log(this.players[i].get_id());
+	// 		$("#player"+(i).toString()+" "+".money").html(money);
+	// 	}
+	// }
 
 	this.round= function(myevent,s){
 		
@@ -208,10 +208,17 @@ function convert_field_id(the_player,number){
 	if(the_player!=0){
 		var now = the_player.get_position().get_id()%100;
 		var temp = now+number;
-		if(temp>19){
-			number = temp-19;
+		if(temp>20){
+			number = temp-20;
 			// number=0;
-			alert("經過起點");
+			alert("經過起點 加兩千元");
+			the_player.add_cash(2000);
+		}
+		else if(temp == 20){
+			number = 0;
+			// number=0;
+			alert("抵達起點 加兩千元");
+			the_player.add_cash(2000);
 		}
 		else{
 			number = temp;

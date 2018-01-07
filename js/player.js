@@ -42,6 +42,7 @@ function Player (id,name){
 	this.add_cash= function(money){
 		console.log(this.cash+money);
 		this.cash = this.cash+money;
+		$("#player"+this.id.toString()+" "+".money").html(this.cash);
 		return this.cash;
 	}
 	this.check_bankruptcy= function(){
@@ -96,50 +97,125 @@ function move (tt,tl,id,moveMark) {
 
    var success=0;
 
-   if(ot!=tt){
-   		if(ot>tt){
-			if(ot-tt<2){
-				$('#'+id).css("top",tt);
-   			}
-   			else{
-   				$('#'+id).css("top",ot-3);
-   			}
-   		}
-   		else{
+	if(ot==tt && ol!= tl){
+		if(ol>tl){
+			if(ol-tl<2){
+	   			$('#'+id).css("left",tl);
+	   		}
+	   		else{
+	   			$('#'+id).css("left",ol-3);
+	   		}
+		}
+		else if(tl>ol){//tl>ol
+			if(tl-ol<2){
+	   			$('#'+id).css("left",tl);
+	   		}
+	   		else{
+	   			$('#'+id).css("left",ol+3);
+	   		}
+		}
+	}
+	else if(ol==tl && ot!=tt){
+		if(tt>ot){
    			if(tt-ot<2){
 				$('#'+id).css("top",tt);
    			}
    			else{
    				$('#'+id).css("top",ot+3);
    			}
-   		}
-
-   }
-   else{
-   		success+=50;
-   }
-
-   if(ol!=tl){
-   		if(ol>tl){
-   			if(ol-tl<2){
-	   			$('#'+id).css("left",tl);
-	   		}
-	   		else{
-	   			$('#'+id).css("left",ol-3);
-	   		}
-   		}
-   		else{
-	   		if(tl-ol<2){
+		}
+		else{
+			if(ot-tt<2){
+				$('#'+id).css("top",tt);
+   			}
+   			else{
+   				$('#'+id).css("top",ot-3);
+   			}
+		}
+	}
+	else if(ol==tl && ot==tt){
+		success=100;
+	}
+	else{
+		if(ol<tl && tt>ot){
+			if(tl-ol<2){
 	   			$('#'+id).css("left",tl);
 	   		}
 	   		else{
 	   			$('#'+id).css("left",ol+3);
 	   		}
-	   	}
-   }
-   else{
-   	success+=50;
-   }
+		}
+		else if(ot<tt && ol>tl){
+   			if(tt-ot<2){
+				$('#'+id).css("top",tt);
+   			}
+   			else{
+   				$('#'+id).css("top",ot+3);
+   			}
+		}
+		else if(ot>tt && ol>tl){
+			if(ol-tl<2){
+	   			$('#'+id).css("left",tl);
+	   		}
+	   		else{
+	   			$('#'+id).css("left",ol-3);
+	   		}
+		}
+		else if(tt<ot && ol<tl){
+			if(ot-tt<2){
+				$('#'+id).css("top",tt);
+   			}
+   			else{
+   				$('#'+id).css("top",ot-3);
+   			}
+		}
+	}
+	
+
+   // if(ot!=tt){
+   // 		if(ot>tt){
+			// if(ot-tt<2){
+			// 	$('#'+id).css("top",tt);
+   // 			}
+   // 			else{
+   // 				$('#'+id).css("top",ot-3);
+   // 			}
+   // 		}
+   // 		else{
+   // 			if(tt-ot<2){
+			// 	$('#'+id).css("top",tt);
+   // 			}
+   // 			else{
+   // 				$('#'+id).css("top",ot+3);
+   // 			}
+   // 		}
+
+   // }
+   // else{
+   // 		success+=50;
+   // }
+
+   // if(ol!=tl){
+   // 		if(ol>tl){
+   // 			if(ol-tl<2){
+	  //  			$('#'+id).css("left",tl);
+	  //  		}
+	  //  		else{
+	  //  			$('#'+id).css("left",ol-3);
+	  //  		}
+   // 		}
+   // 		else{
+	  //  		if(tl-ol<2){
+	  //  			$('#'+id).css("left",tl);
+	  //  		}
+	  //  		else{
+	  //  			$('#'+id).css("left",ol+3);
+	  //  		}
+	  //  	}
+   // }
+   // else{
+   // 	success+=50;
+   // }
 
    if(success==100){
    		window.dispatchEvent(moveMark);
