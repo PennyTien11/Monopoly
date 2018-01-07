@@ -1,0 +1,75 @@
+table{
+	position: relative;
+	margin: auto;
+}
+td{
+	border: 1px dashed black;
+	width: 100px;
+	height: 100px;
+	position: relative;
+}
+
+#title{
+	font-size: 50px;
+	width: 50px;
+	margin: auto;
+}
+
+.mark{
+	display: none;
+	position: absolute;
+}
+
+.player{
+	width: 50px;
+	height:50px;
+	position: absolute;
+
+}
+
+#player0{
+	top:0px;
+	left:0px;
+	background: yellow;
+}
+
+#player1{
+	top:0px;
+	right:0px;
+	background: red;
+}
+
+#player2{
+	bottom: 0px;
+	right: 0px;
+	background: orange;
+}
+#player3{
+	bottom:0px;
+	left: 0px;
+	background: green;
+}
+.status{
+	bottom: -40px;
+	position: relative;
+}
+.roll{
+	display: none;
+}
+#die{
+	width: 50px;
+	margin: auto;
+}
+.country{
+	position: absolute;
+	bottom:0px;
+}
+.status{
+	position: absolute;
+	top: 0px;
+	right:0px;
+	font-size: 10px;
+}
+.hint{
+	font-size: 15px;
+}
